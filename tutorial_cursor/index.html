@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cursor-paginate" class="md-skip">
+        <a href="#cursor-based-paginate" class="md-skip">
           Skip to content
         </a>
       
@@ -370,7 +370,7 @@
                   
 
 
-<h1 id="cursor-paginate">Cursor Paginate</h1>
+<h1 id="cursor-based-paginate">Cursor Based Paginate</h1>
 <h2 id="installation">Installation</h2>
 <p>First of all, you need to install villain-pagination on your local to start.</p>
 <pre><code>pip install villain-pagination
@@ -387,8 +387,8 @@ You need to import <code>page</code> and <code>paginator</code> function from <c
 <ul>
 <li><code>db</code> : is a SQLAlchemy session.</li>
 <li><code>model</code> : is a object which you want to paginate.</li>
-<li><code>cursor</code> : is a position of a page requested to show.</li>
 <li><code>order_by</code> : is a column of the model.</li>
+<li><code>cursor</code> : is a number of a reference data requested to show.</li>
 <li><code>size</code> : is a number of data which will shown in one page.</li>
 </ul>
 <p>And Here is an example.</p>
@@ -434,7 +434,7 @@ def get_db() -&gt; Iterator[Session]:
 
 @app.get(&quot;/users/&quot;, response_model=page.Page)
 def get_users(db: Session = Depends(get_db)) -&gt; Any:
-    return paginator.paginate_cursor(db = db, model = User, cursor = 10,order_by= User.id, page = 0, size = 10)
+    return paginator.paginate_cursor(db = db, model = User, order_by= User.id, cursor = 10, size = 10)
 
 </code></pre>
 
