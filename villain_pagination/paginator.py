@@ -12,8 +12,8 @@ def paginate(db: Session, model: object, order_by: object, page: int, size: int)
     return create_page(objects, page, size)
 
 
-def paginate_cursor(db: Session, model: object, cursor : int, order_by: object, size: int):
-    objects = get_objects_cursor(db, model, cursor, order_by, size)
+def paginate_cursor(db: Session, model: object, order_by: object, cursor : int, size: int):
+    objects = get_objects_cursor(db, model, order_by, cursor, size)
 
     if len(objects) == 0:
         raise HTTPException(status_code=404, detail="Page not found")
@@ -29,9 +29,9 @@ def get_objects(db: Session, model: object, order_by: object, page: int, size: i
     return query.order_by(order_by).offset(page * size).limit(size).all()
 
 
-def get_objects_cursor(db: Session, model: object, cursor : int, order_by: object, size: int):
+def get_objects_cursor(db: Session, model: object, order_by: object, cursor : int, size: int):
 
-    size, page, order_by = valid_params(model, size, page, order_by)
+    size, page, order_by = valid_params(model, size, 0, order_by)
     if cursor == '' or size < 0 or cursor is None:
         cursor = 0
 
