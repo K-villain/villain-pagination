@@ -1,4 +1,4 @@
-# Cursor Paginate
+# Cursor Based Paginate
 
 ## Installation
 First of all, you need to install villain-pagination on your local to start.
@@ -19,8 +19,8 @@ To use paginate, 5 params required.
 
 - `db` : is a SQLAlchemy session.
 - `model` : is a object which you want to paginate.
-- `cursor` : is a position of a page requested to show.
 - `order_by` : is a column of the model.
+- `cursor` : is a number of a reference data requested to show.
 - `size` : is a number of data which will shown in one page.
 
 And Here is an example.
@@ -68,6 +68,6 @@ def get_db() -> Iterator[Session]:
 
 @app.get("/users/", response_model=page.Page)
 def get_users(db: Session = Depends(get_db)) -> Any:
-    return paginator.paginate_cursor(db = db, model = User, cursor = 10,order_by= User.id, page = 0, size = 10)
+    return paginator.paginate_cursor(db = db, model = User, order_by= User.id, cursor = 10, size = 10)
 
 ```
