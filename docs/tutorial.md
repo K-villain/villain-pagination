@@ -33,7 +33,7 @@ from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
 
-from villain import page, paginator
+from villain-pagination import page, paginator
 
 engine = create_engine("sqlite:///.db", connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
