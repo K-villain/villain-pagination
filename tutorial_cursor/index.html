@@ -399,7 +399,7 @@ from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
 
-from villain import page, paginator
+from villain-pagination import page, paginator
 
 engine = create_engine(&quot;sqlite:///.db&quot;, connect_args={&quot;check_same_thread&quot;: False})
 SessionLocal = sessionmaker(autocommit=True, autoflush=True, bind=engine)
